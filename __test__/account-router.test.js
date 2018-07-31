@@ -14,9 +14,9 @@ describe('AUTH router', () => {
   afterAll(server.stop)
   afterEach(accountMock.remove)
 
-  describe('/admin/signup', () => {
-    test('POST /admin/signup with 200', () => {
-      return superagent.post(`${apiURL}/admin/signup`)
+  describe('/signup', () => {
+    test('POST /signup with 200', () => {
+      return superagent.post(`${apiURL}/signup`)
         .send({
           accountName: 'ChunkyCheese',
           email: 'TheChunks@yahoo.com',
@@ -28,8 +28,8 @@ describe('AUTH router', () => {
         })
     })
 
-    test('POST /admin/signup with 400 (missing email)', () => {
-      return superagent.post(`${apiURL}/admin/signup`)
+    test('POST /signup with 400 (missing email)', () => {
+      return superagent.post(`${apiURL}/signup`)
         .send({
           accountName: 'ChunkyCheese',
           password: '1234password',
@@ -40,8 +40,8 @@ describe('AUTH router', () => {
         })
     })
 
-    test('POST /admin/signup with 409 (duplicate)', () => {
-      return superagent.post(`${apiURL}/admin/signup`)
+    test('POST /signup with 409 (duplicate)', () => {
+      return superagent.post(`${apiURL}/signup`)
         .send({
           accountName: 'ChunkyCheese',
           email: 'TheChunks@yahoo.com',
@@ -49,7 +49,7 @@ describe('AUTH router', () => {
         })
         .then(() => {
           // Same username signing up
-          return superagent.post(`${apiURL}/admin/signup`)
+          return superagent.post(`${apiURL}/signup`)
             .send({
               accountName: 'ChunkyCheese',
               email: 'TheChunks@yahoo.com',

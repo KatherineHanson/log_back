@@ -6,7 +6,7 @@ const basicAuth = require('../lib/basic-auth-middleware')
 
 const authRouter = module.exports = new Router()
 
-authRouter.post('/admin/signup', (req, res, next) => {
+authRouter.post('/signup', (req, res, next) => {
   Account.create(req.body)
     .then(account => account.tokenCreate())
     .then(token => {
@@ -16,7 +16,7 @@ authRouter.post('/admin/signup', (req, res, next) => {
     .catch(next)
 })
 
-authRouter.get('/admin/login', basicAuth, (req, res, next) => {
+authRouter.get('/login', basicAuth, (req, res, next) => {
   req.account.tokenCreate()
     .then(token => {
       res.cookie('X-Witnesby-Token', token, {maxAge: 604800000})
